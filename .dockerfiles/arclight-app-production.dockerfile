@@ -27,7 +27,6 @@ COPY --chown=$UID:$GID . /opt/app-root/
 
 #ENV DATABASE_URL=postgresql://postgres:arclight@db/arclight
 ENV RAILS_ENV=production
-ENV RAILS_MASTER_KEY=f99ee1a4248cb1a6cdaaa4771320dbb1
 RUN bundle exec rails assets:precompile
 
 CMD ["bundle", "exec", "bin/rails", "s", "-b", "0.0.0.0"]
