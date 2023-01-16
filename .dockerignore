@@ -1,0 +1,9 @@
+# Ignore
+.bundle
+.cache
+.dockerfiles
+.github
+db/*.sqlite3
+log/*
+tmp/*
+!**/.keep

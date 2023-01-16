@@ -1,0 +1,33 @@
+---
+name: Continuous Integration
+
+on:
+  workflow_dispatch:  # This allows to kick-off the action manually from GitHub Actions
+  push:
+  pull_request:
+
+env:
+  RAILS_ENV: test
+
+jobs:
+
+  ci:
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
+    strategy:
+      matrix:
+        ruby:
+          - '3.2.0'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: DB Migration
+        run: bundle exec rake db:migrate
+      - name: Default Rake Task
+        run: bundle exec rake
